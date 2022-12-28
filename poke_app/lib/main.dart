@@ -15,8 +15,8 @@ class Pokedex extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
       routes: {
+        HomeScreen.routeName: ((context) => HomeScreen()),
         PokemonDetailsScreen.routeName: ((context) => PokemonDetailsScreen()),
       },
     );

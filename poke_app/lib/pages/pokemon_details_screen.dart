@@ -8,7 +8,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 // My Files
 import '../widgets/pokemon_type.dart';
 import '../widgets/texts.dart';
-
+import '../pages/home_screen.dart';
 import '../models/pokemon.dart';
 import '../theme/custom_theme.dart';
 
@@ -21,8 +21,9 @@ class PokemonDetailsScreen extends StatelessWidget {
     final theme = CustomTheme.portfolioTheme;
     // Getting the arguments
     final args = ModalRoute.of(context)?.settings.arguments as Map;
+    final pokemons = args['pokemons'];
     final pokemonIndex = args['index'];
-    final Pokemon pokemon = args['pokemons'][pokemonIndex];
+    final Pokemon pokemon = pokemons[pokemonIndex];
     // Specifying what i need
     final List<String> types = pokemon.types;
     double widthDevice = MediaQuery.of(context).size.width;
@@ -30,6 +31,13 @@ class PokemonDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () => Navigator.pushNamed(
+            context,
+            HomeScreen.routeName,
+          ),
+        ),
         centerTitle: false,
         title: PokemonName(
           pokemon.name,
@@ -64,13 +72,54 @@ class PokemonDetailsScreen extends StatelessWidget {
               child: PokemonInformation(types: types, pokemon: pokemon),
             ),
           ),
+          if (pokemonIndex <= 151)
+            Positioned(
+              right: 80,
+              top: 10,
+              child: CachedNetworkImage(
+                imageUrl: pokemon.imageUrl,
+                height: 200,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          if (pokemonIndex >= 1)
+            Positioned(
+              left: 10,
+              top: 160,
+              child: InkWell(
+                child: Icon(
+                  Icons.arrow_left_rounded,
+                  color: pokemon.getColor(types[0]),
+                  size: 100,
+                ),
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    PokemonDetailsScreen.routeName,
+                    arguments: {
+                      'index': pokemonIndex - 1,
+                      'pokemons': pokemons
+                    },
+                  );
+                },
+              ),
+            ),
           Positioned(
-            right: 80,
-            top: 10,
-            child: CachedNetworkImage(
-              imageUrl: pokemon.imageUrl,
-              height: 200,
-              fit: BoxFit.fitHeight,
+            right: 10,
+            top: 160,
+            child: InkWell(
+              child: Icon(
+                Icons.arrow_right_rounded,
+                color: pokemon.getColor(types[0]),
+                size: 100,
+              ),
+              onTap: () {
+                Navigator.pushNamed(
+                  context,
+                  PokemonDetailsScreen.routeName,
+                  arguments: {'index': pokemonIndex + 1, 'pokemons': pokemons},
+                );
+              },
             ),
           ),
         ],
@@ -269,6 +318,9 @@ class BaseStats extends StatelessWidget {
                 }).toList(),
               ],
             ),
+            SizedBox(
+              width: 4,
+            ),
             VerticalDivider(
               width: 20,
               thickness: 2,
@@ -295,7 +347,7 @@ class BaseStats extends StatelessWidget {
               ],
             ),
             SizedBox(
-              width: 10,
+              width: 4,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -307,11 +359,14 @@ class BaseStats extends StatelessWidget {
                       SizedBox(
                         width: 150,
                         child: LinearPercentIndicator(
+                          animation: true,
+                          animationDuration: 1000,
+                          barRadius: Radius.circular(5),
                           progressColor: pokemon.getColor(types[0]),
                           backgroundColor:
                               pokemon.getColor(types[0]).withOpacity(0.2),
-                          lineHeight: 10,
-                          percent: (stat.value / 500),
+                          lineHeight: 12,
+                          percent: (stat.value / 200),
                         ),
                       ),
                     ],

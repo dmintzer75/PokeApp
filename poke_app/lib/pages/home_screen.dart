@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:searchfield/searchfield.dart';
 
 // My Files
 import '../models/pokemon.dart';
@@ -12,7 +13,7 @@ import '../widgets/pokemon_type.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
-
+  static final routeName = '/';
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
@@ -21,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final theme = CustomTheme.portfolioTheme;
   final pokeApi = 'https://pokeapi.co/api/v2/pokemon/';
   List pokemons = [];
+  String? _selectedPokemon;
+  List<String> pokemonNames = [];
 
   @override
   void initState() {
@@ -44,17 +47,17 @@ class _HomeScreenState extends State<HomeScreen> {
           : Stack(
               children: [
                 Positioned(
-                  top: 40,
-                  right: 10,
+                  top: 60,
+                  right: 20,
                   child: Opacity(
                     opacity: 0.3,
                     child: Image.asset('assets/pokedex_grey.png',
-                        height: 120, fit: BoxFit.fitHeight),
+                        height: 140, fit: BoxFit.fitHeight),
                   ),
                 ),
                 const Positioned(
-                  top: 100,
-                  left: 20,
+                  top: 120,
+                  left: 40,
                   child: Text(
                     'Pokedex',
                     style: TextStyle(
@@ -86,12 +89,56 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
+                // Positioned(
+                //   top: 100,
+                //   left: 10,
+                //   child: SizedBox(
+                //     width: 250,
+                //     child: SearchField(
+                //       hint: 'Search for a Pokemon',
+                //       onSubmit: (pokemon) {
+                //         setState(() {
+                //           _selectedPokemon = pokemon;
+
+                //           for (var i = 0; i < pokemons.length; i++) {
+                //             if (pokemons[i].name == _selectedPokemon) {
+                //               pokemons = [pokemons[i]];
+                //             }
+                //           }
+                //         });
+                //       },
+                //       suggestions: pokemonNames
+                //           .map((e) => SearchFieldListItem(e, child: Text(e)))
+                //           .toList(),
+                //       searchStyle: TextStyle(
+                //         fontSize: 18,
+                //         color: Colors.black.withOpacity(0.8),
+                //       ),
+                //       searchInputDecoration: InputDecoration(
+                //         focusedBorder: OutlineInputBorder(
+                //           borderSide: BorderSide(
+                //             color: Colors.black.withOpacity(0.8),
+                //           ),
+                //         ),
+                //         border: const OutlineInputBorder(
+                //           borderSide: BorderSide(color: Colors.red),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // )
               ],
             ),
     );
   }
 
   // HELPER FUNCTIONS -------------------------------------------------------
+
+  void filterPokemon(String? s) {
+    List<String> filteredPokemon = pokemonNames;
+    pokemons.where((element) => element.name == s);
+    setState(() {});
+  }
 
   Future<void> fetchData() async {
     pokemons.clear();
@@ -133,6 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
             moves: moves,
             stats: stats),
       );
+      pokemonNames.add(capitalize(decodedPokemon['name']));
     }
 
     setState(() {});
@@ -172,6 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
             moves: moves,
             stats: stats),
       );
+      pokemonNames.add(capitalize(decodedPokemon['name']));
       setState(() {});
     }
   }
