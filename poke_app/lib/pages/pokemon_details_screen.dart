@@ -173,7 +173,7 @@ class PokemonInformation extends StatelessWidget {
         ),
         MainAttributes(pokemon: pokemon),
         const SizedBox(
-          height: 40,
+          height: 20,
         ),
         Subtitle(
           text: 'Base Stats',
