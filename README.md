@@ -5,7 +5,7 @@
 <br />
 <div align="center">
   <a href="">
-    <img src="assets/icon_pokedex.png" alt="Logo" width="80" height="80">
+    <img src="icon_pokedex.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Poke App</h3>
@@ -18,7 +18,7 @@
 
    <br />
 <div align="center">
-<img src="assets/phone_app.png" alt="Logo" width="480">
+<img src="phone_app.png" alt="Logo" width="480">
 </div>
    <br />
 <!-- ABOUT THE PROJECT -->
