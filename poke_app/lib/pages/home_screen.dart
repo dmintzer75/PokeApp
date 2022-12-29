@@ -199,10 +199,18 @@ class _HomeScreenState extends State<HomeScreen> {
             decodedPokemon['stats'][i]['base_stat'];
       }
       // Generate Moves
-      List<String> moves = [
-        capitalize(decodedPokemon['moves'][0]['move']['name']),
-        capitalize(decodedPokemon['moves'][1]['move']['name'])
-      ];
+      List<String> getMoves() {
+        String firstMove = decodedPokemon['moves'][0]['move']['name'];
+        String? secondMove;
+        if (decodedPokemon['moves'].length > 1) {
+          secondMove = capitalize(decodedPokemon['moves'][1]['move']['name']);
+          return [firstMove, secondMove];
+        } else {
+          return [firstMove];
+        }
+      }
+
+      List<String> moves = getMoves();
       // Generate Type/s
       List<String> types = List.generate(
         decodedPokemon['types'].length,
@@ -229,8 +237,8 @@ class _HomeScreenState extends State<HomeScreen> {
     await fetchData().then((_) => fetchRestOfData());
   }
 
-  String capitalize(String word) {
-    if (word.trim().isEmpty) return "";
+  String capitalize(String? word) {
+    if (word!.trim().isEmpty) return "";
 
     return "${word[0].toUpperCase()}${word.substring(1)}";
   }
