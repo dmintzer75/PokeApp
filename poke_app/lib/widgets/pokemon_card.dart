@@ -19,6 +19,8 @@ class PokemonCard extends StatelessWidget {
   final List pokemons;
 
   Widget build(BuildContext context) {
+    double widthDevice = MediaQuery.of(context).size.width;
+    double heightDevice = MediaQuery.of(context).size.height;
     final Pokemon pokemon = pokemons[index];
     List<String> types = pokemon.types;
     Color color = pokemon.getColor(types[0]);
@@ -29,7 +31,7 @@ class PokemonCard extends StatelessWidget {
             arguments: {'index': index, 'pokemons': pokemons});
       },
       child: Container(
-        margin: const EdgeInsets.all(4),
+        margin: widthDevice > 800 ? EdgeInsets.all(60) : EdgeInsets.all(4),
         decoration: BoxDecoration(
             color: color,
             borderRadius: const BorderRadius.all(Radius.circular(25))),

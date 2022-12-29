@@ -161,7 +161,7 @@ class PokemonInformation extends StatelessWidget {
           ],
         ),
         const SizedBox(
-          height: 40,
+          height: 20,
         ),
         Subtitle(
           text: 'About',
@@ -169,7 +169,7 @@ class PokemonInformation extends StatelessWidget {
           color: pokemon.getColor(types[0]),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         MainAttributes(pokemon: pokemon),
         const SizedBox(
@@ -293,10 +293,11 @@ class BaseStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10),
       child: SizedBox(
         height: 170,
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

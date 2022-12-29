@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "69536054008",
+    "project_id": "poke-app-668a2",
+    "storage_bucket": "poke-app-668a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69536054008:android:85668d56b3d0de731e990d",
+        "android_client_info": {
+          "package_name": "com.example.poke_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69536054008-aq80p9d4i0epp2dfer53js6roohkj5qe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGZpAC-4GqWvFs_5i4da3PA1KOecZtMmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69536054008-aq80p9d4i0epp2dfer53js6roohkj5qe.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69536054008-e8dslc8pmfkd00ng2lnjasmv60b6599h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pokeAppDario"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
