@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:searchfield/searchfield.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 // My Files
 import '../models/pokemon.dart';
@@ -47,23 +48,44 @@ class _HomeScreenState extends State<HomeScreen> {
           : Stack(
               children: [
                 Positioned(
-                  top: 60,
-                  right: 20,
+                  top: 40,
+                  right: -10,
                   child: Opacity(
                     opacity: 0.3,
                     child: Image.asset('assets/pokedex_grey.png',
                         height: 140, fit: BoxFit.fitHeight),
                   ),
                 ),
-                const Positioned(
-                  top: 120,
-                  left: 40,
-                  child: Text(
-                    'Pokedex',
-                    style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black),
+                Positioned(
+                  top: 68,
+                  left: 10,
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 280,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(60),
+                      ),
+                      color: Colors.yellow[600],
+                    ),
+                    child: AnimatedTextKit(
+                      pause: Duration(milliseconds: 2000),
+                      animatedTexts: [
+                        TyperAnimatedText(
+                          speed: Duration(milliseconds: 350),
+                          'Pokedex',
+                          textStyle: TextStyle(
+                            letterSpacing: 4,
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue[600],
+                            fontFamily: 'Pokemon',
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Positioned(
@@ -89,44 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                 ),
-                // Positioned(
-                //   top: 100,
-                //   left: 10,
-                //   child: SizedBox(
-                //     width: 250,
-                //     child: SearchField(
-                //       hint: 'Search for a Pokemon',
-                //       onSubmit: (pokemon) {
-                //         setState(() {
-                //           _selectedPokemon = pokemon;
-
-                //           for (var i = 0; i < pokemons.length; i++) {
-                //             if (pokemons[i].name == _selectedPokemon) {
-                //               pokemons = [pokemons[i]];
-                //             }
-                //           }
-                //         });
-                //       },
-                //       suggestions: pokemonNames
-                //           .map((e) => SearchFieldListItem(e, child: Text(e)))
-                //           .toList(),
-                //       searchStyle: TextStyle(
-                //         fontSize: 18,
-                //         color: Colors.black.withOpacity(0.8),
-                //       ),
-                //       searchInputDecoration: InputDecoration(
-                //         focusedBorder: OutlineInputBorder(
-                //           borderSide: BorderSide(
-                //             color: Colors.black.withOpacity(0.8),
-                //           ),
-                //         ),
-                //         border: const OutlineInputBorder(
-                //           borderSide: BorderSide(color: Colors.red),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // )
               ],
             ),
     );
