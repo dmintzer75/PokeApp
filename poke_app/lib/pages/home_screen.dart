@@ -127,11 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> fetchData() async {
     pokemons.clear();
 
-    final url = Uri.https('pokeapi.co', '/api/v2/pokemon/', {'limit': '12'});
+    final url = Uri.https('pokeapi.co', '/api/v2/pokemon/', {'limit': '11'});
 
     final response = await http.get(url);
     final decoded = convert.jsonDecode(response.body);
     for (int i = 0; i < decoded['results'].length; i++) {
+      pokemonNames.add(capitalize(decoded['name']));
       String singlePokemonUrl = decoded['results'][i]['url'];
       final pokemonResponse = await http.get(Uri.parse(singlePokemonUrl));
       final decodedPokemon = convert.jsonDecode(pokemonResponse.body);
@@ -164,7 +165,6 @@ class _HomeScreenState extends State<HomeScreen> {
             moves: moves,
             stats: stats),
       );
-      pokemonNames.add(capitalize(decodedPokemon['name']));
     }
 
     setState(() {});
@@ -222,7 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   String capitalize(String? word) {
-    if (word!.trim().isEmpty) return "";
+    if (word == null) return '';
+    if (word.trim().isEmpty) return "";
 
     return "${word[0].toUpperCase()}${word.substring(1)}";
   }
