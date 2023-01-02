@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:69536054008:android:85668d56b3d0de731e990d",
         "android_client_info": {
-          "package_name": "com.example.poke_app"
+          "package_name": "com.dariomintzer.pokeapp"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "69536054008-e8dslc8pmfkd00ng2lnjasmv60b6599h.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.pokeAppDario"
+                "bundle_id": "com.dariomintzer.pokeapp"
               }
             }
           ]
